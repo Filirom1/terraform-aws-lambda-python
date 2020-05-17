@@ -52,9 +52,9 @@ resource "aws_cloudwatch_log_group" "this" {
 #---------------------------------------------------------------------------------------------------
 
 resource "aws_lambda_function" "this" {
-  filename         = data.archive_file.source.output_path
+  filename         = module.python_lambda_archive.archive_path
   role             = aws_iam_role.this.arn
-  source_code_hash = data.archive_file.source.output_base64sha256
+  source_code_hash = module.python_lambda_archive.source_code_hash
 
   runtime                        = var.runtime
   handler                        = var.handler
